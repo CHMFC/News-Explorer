@@ -1,16 +1,21 @@
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 
-export default function BarraSuperior() {
+export default function BarraSuperior({onMudancaPagina}) {
+
+  const irParaHome = () => {
+    onMudancaPagina(0);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}></View>
-      <View style={styles.logoContainer}>
+      <TouchableOpacity onPress={irParaHome} style={styles.logoContainer}>
         <Image
           resizeMode="contain"
           style={styles.logoImage}
           source={require("../assets/logoHorizontal.png")}
         />
-      </View>
+      </TouchableOpacity>
       <View style={styles.rightContainer}></View>
     </View>
   );
@@ -31,8 +36,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   logoImage: {
+    marginLeft: -5,
     width: "100%",
-    height: "100%",
+    height: "130%",
   },
   rightContainer: {
     width: "30%",

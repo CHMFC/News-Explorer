@@ -7,7 +7,7 @@ import BarraSuperior from "./src/BarraSuperior";
 import BarraInferior from "./src/BarraInferior";
 
 export default function App() {
-  const [pagina, setPagina] = useState(1);
+  const [pagina, setPagina] = useState(0);
 
   const handleMudancaPagina = (codPagina) => {
     setPagina(codPagina);
@@ -16,7 +16,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topContent}>
-        <BarraSuperior/>
+        <BarraSuperior onMudancaPagina={handleMudancaPagina}/>
       </View>
       <View style={styles.mainContent}>
         {pagina == 0 ? (
@@ -26,7 +26,7 @@ export default function App() {
         )}
       </View>
       <View style={styles.bottomContent}>
-        <BarraInferior/>
+        <BarraInferior onMudancaPagina={handleMudancaPagina}/>
       </View>
     </SafeAreaView>
   );
@@ -35,25 +35,25 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "rgba(100,100,255,255)",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   topContent: {
     width: "100%",
     height: "8%",
-    backgroundColor: "rgba(100,100,255,255)",
     flexDirection: "row",
   },
   mainContent: {
-    height: "89%",
+    height: "92%",
     width: "100%",
+    backgroundColor: "white",
     borderRadius: 20,
   },
   bottomContent: {
-    marginTop: -10,
+    marginTop: -40,
     width: "100%",
-    height: "10%",
-    borderRadius: 15,
+    height: "11%",
+    borderRadius: 50,
     backgroundColor: "rgba(100,100,255,255)",
     flexDirection: "row",
     paddingBottom: "8%",

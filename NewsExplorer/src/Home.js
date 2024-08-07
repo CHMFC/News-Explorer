@@ -68,9 +68,9 @@ export default function Home() {
               {article.author ? article.author : "Desconhecido"}
             </Text>
           </View>
-          {artigos.urlToImage && (
+          {article.urlToImage && (
               <Image
-                source={{ uri: artigos.urlToImage }}
+                source={{ uri: article.urlToImage }}
                 style={styles.image}
                 resizeMode="contain"
               />
@@ -97,10 +97,10 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+    paddingTop: 10,
     alignItems: "center",
   },
   homeTitleContainerStyle: {
-    marginTop: 8,
     marginBottom: 16,
     width: "90%",
     borderBottomWidth: 1,
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     padding: 15,
     borderWidth: 1,
-    borderColor: "#ddd",
+    borderColor: "rgba(150,150,255,255)",
     borderRadius: 10,
     backgroundColor: "#fff",
     width: "90%",
@@ -151,5 +151,10 @@ const styles = StyleSheet.create({
   },
   articleContentTextStyle: {
     fontSize: 10,
+  },
+  image: {
+    width: "100%",
+    height: 200,
+    marginBottom: 10,
   },
 });

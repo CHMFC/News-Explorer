@@ -1,13 +1,40 @@
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Image } from "react-native";
 
-export default function BarraInferior() {
+export default function BarraInferior({ onMudancaPagina }) {
+  const irParaHome = () => {
+    onMudancaPagina(0);
+  };
+
+  const irParaBuscar = () => {
+    onMudancaPagina(1);
+  };
+
+  const irParaHistorico = () => {
+    onMudancaPagina(2);
+  };
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.leftContainer}>
-        <Text style={styles.leftContainerText}>Home</Text>
+      <TouchableOpacity onPress={irParaBuscar} style={styles.leftContainer}>
+        <Image
+          resizeMode="contain"
+          style={styles.logoImage}
+          source={require("../assets/historico.png")}
+        />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.rightContainer}>
-        <Text style={styles.RightContainerText}>Buscar</Text>
+      <TouchableOpacity onPress={irParaHome} style={styles.centerConteiner}>
+        <Image
+          resizeMode="contain"
+          style={styles.logoImage}
+          source={require("../assets/home.png")}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={irParaBuscar} style={styles.rightContainer}>
+        <Image
+          resizeMode="contain"
+          style={styles.logoImage}
+          source={require("../assets/buscar.png")}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -20,29 +47,34 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   leftContainer: {
-    width: "50%",
+    width: "30%",
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
     borderRightWidth: 1,
     borderColor: "white",
+    paddingRight: 25,
   },
-  leftContainerText: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
+  logoImage: {
+    width: "100%",
+    height: "50%",
+  },
+  centerConteiner: {
+    width: "40%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRightWidth: 1,
+    borderLeftWidth: 1,
+    borderColor: "white",
   },
   rightContainer: {
-    width: "50%",
+    width: "30%",
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
     borderLeftWidth: 1,
     borderColor: "white",
-  },
-  RightContainerText: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
+    paddingLeft: 20,
   },
 });
