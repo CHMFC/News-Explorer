@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Button,
   ScrollView,
@@ -10,29 +10,36 @@ import {
   Image,
   TouchableOpacity,
   Linking,
-} from 'react-native';
-import axios from 'axios';
+} from "react-native";
+import axios from "axios";
 
-const NEWS_API_KEY = 'bba3df2699cf480f9e466349ed84fb8b';
+const NEWS_API_KEY = "bba3df2699cf480f9e466349ed84fb8b";
 
-export default function SearchNews() {
-  const [keyword, setKeyword] = useState('');
+export default function SearchNews({ onAddToHistory, initialKeyword }) {
+  const [keyword, setKeyword] = useState(initialKeyword || "");
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchNews = async () => {
-    if (!keyword.trim()) {
+  useEffect(() => {
+    if (initialKeyword) {
+      fetchNews(initialKeyword);
+    }
+  }, [initialKeyword]);
+
+  const fetchNews = async (searchKeyword = keyword) => {
+    if (!searchKeyword.trim()) {
       return;
     }
-    
+
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://newsapi.org/v2/everything?q=${keyword}&language=pt&apiKey=${NEWS_API_KEY}`
+        `https://newsapi.org/v2/everything?q=${searchKeyword}&language=pt&apiKey=${NEWS_API_KEY}`
       );
       setArticles(response.data.articles);
+      onAddToHistory(searchKeyword);
     } catch (error) {
-      console.error('Error fetching the news:', error);
+      console.error("Error fetching the news:", error);
     } finally {
       setLoading(false);
     }
@@ -45,9 +52,7 @@ export default function SearchNews() {
   return (
     <View style={styles.container}>
       <View style={styles.homeTitleContainerStyle}>
-        <Text style={styles.homeTitleTextStyle}>
-          Buscar Notícias
-        </Text>
+        <Text style={styles.homeTitleTextStyle}>Buscar Notícias</Text>
       </View>
       <TextInput
         style={styles.input}
@@ -55,10 +60,10 @@ export default function SearchNews() {
         value={keyword}
         onChangeText={setKeyword}
       />
-      <Button title="Buscar" onPress={fetchNews} />
-      
+      <Button title="Buscar" onPress={() => fetchNews(keyword)} />
+
       {loading && <ActivityIndicator size="large" color="#0000ff" />}
-      
+
       <ScrollView contentContainerStyle={styles.resultsContainer}>
         {articles.map((article, index) => (
           <TouchableOpacity
@@ -68,7 +73,7 @@ export default function SearchNews() {
           >
             <View style={styles.articleOriginContainer}>
               <Text style={styles.articleOriginText}>
-                {article.author ? article.author : 'Desconhecido'}
+                {article.author ? article.author : "Desconhecido"}
               </Text>
             </View>
             {article.urlToImage && (
@@ -96,8 +101,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     paddingTop: 10,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    alignItems: "center",
+    justifyContent: "flex-start",
   },
   homeTitleContainerStyle: {
     marginBottom: 16,
@@ -105,7 +110,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 2,
   },
   homeTitleTextStyle: {
     fontSize: 28,
@@ -114,7 +118,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    width: '90%',
+    width: "90%",
     borderWidth: 1,
     borderColor: "rgba(80,80,255,255)",
     borderRadius: 5,
@@ -122,7 +126,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   resultsContainer: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   articleContainer: {
     marginBottom: 20,
@@ -130,25 +134,25 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "rgba(150,150,255,255)",
     borderRadius: 10,
-    backgroundColor: '#fff',
-    width: '90%',
+    backgroundColor: "#fff",
+    width: "90%",
   },
   articleOriginContainer: {
-    backgroundColor: 'rgba(0,100,255,0.5)',
+    backgroundColor: "rgba(100,100,255,100)",
     borderWidth: 1,
     borderRadius: 10,
-    borderColor: '#ddd',
-    justifyContent: 'center',
-    alignItems: 'center',
+    borderColor: "#ddd",
+    justifyContent: "center",
+    alignItems: "center",
     marginBottom: 5,
   },
   articleOriginText: {
     fontSize: 16,
-    fontWeight: 'bold',
-    color: 'white',
+    fontWeight: "bold",
+    color: "white",
   },
   image: {
-    width: '100%',
+    width: "100%",
     height: 200,
     marginBottom: 10,
   },
@@ -157,7 +161,7 @@ const styles = StyleSheet.create({
   },
   articleTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   articleContentContainer: {
     marginBottom: 5,
