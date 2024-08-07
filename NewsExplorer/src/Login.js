@@ -3,11 +3,10 @@ import {
   View,
   Text,
   TextInput,
-  Button,
-  StyleSheet,
   Alert,
   Image,
   TouchableOpacity,
+  StyleSheet,
 } from "react-native";
 import * as FileSystem from "expo-file-system";
 import Papa from "papaparse";
@@ -38,9 +37,8 @@ export default function Login({ onLoginSuccess }) {
       );
 
       if (user) {
-        onLoginSuccess(2); // Chame a função de sucesso de login fornecida como prop
-      }
-      else {
+        onLoginSuccess(3, username); // Passar o nome de usuário para a função de sucesso de login
+      } else {
         Alert.alert("Erro", "Credenciais inválidas");
       }
     } catch (error) {
@@ -79,12 +77,12 @@ export default function Login({ onLoginSuccess }) {
             secureTextEntry
           />
         </View>
-        <TouchableOpacity onPress = {handleLogin} style={styles.loginButton}>
+        <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
           <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.cadastroButtonContainer}>
-        <TouchableOpacity onPress = {irParaCadastro} style={styles.cadastroButton}>
+        <TouchableOpacity onPress={irParaCadastro} style={styles.cadastroButton}>
           <Text style={styles.cadastroText}>Fazer Cadastro</Text>
         </TouchableOpacity>
       </View>

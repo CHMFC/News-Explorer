@@ -25,7 +25,14 @@ export default function Cadastro({ onCadastroSuccess }) {
     }
 
     try {
-      const path = FileSystem.documentDirectory + "database/banco.csv";
+      const directory = FileSystem.documentDirectory + "database/";
+      const path = directory + "banco.csv";
+      const directoryExists = await FileSystem.getInfoAsync(directory);
+
+      if (!directoryExists.exists) {
+        await FileSystem.makeDirectoryAsync(directory, { intermediates: true });
+      }
+
       const fileExists = await FileSystem.getInfoAsync(path);
 
       let results = { data: [] };
