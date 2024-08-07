@@ -6,17 +6,27 @@ import Buscar from "./src/Buscar";
 import Historico from "./src/Historico";
 import BarraSuperior from "./src/BarraSuperior";
 import BarraInferior from "./src/BarraInferior";
+import Login from "./src/Login";
+import Cadastro from "./src/Cadastro";
 
 export default function App() {
   const [pagina, setPagina] = useState(0);
+  const [login, setLogin] = useState(0);
   const [searchHistory, setSearchHistory] = useState([]);
   const [initialKeyword, setInitialKeyword] = useState("");
 
   const handleMudancaPagina = (codPagina, keyword = "") => {
     if (codPagina === 1) {
       setInitialKeyword(keyword);
+    } else if (codPagina === 5){
+      setLogin(0);
+      codPagina = 0;
     }
     setPagina(codPagina);
+  };
+
+  const handleLogin = (codLogin) => {
+    setLogin(codLogin);
   };
 
   const handleAddToHistory = (keyword) => {
@@ -29,21 +39,35 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.topContent}>
-        <BarraSuperior onMudancaPagina={handleMudancaPagina} />
-      </View>
-      <View style={styles.mainContent}>
-        {pagina === 0 ? (
-          <Home />
-        ) : pagina === 1 ? (
-          <Buscar onAddToHistory={handleAddToHistory} initialKeyword={initialKeyword} />
-        ) : (
-          <Historico searchHistory={searchHistory} onMudancaPagina={handleMudancaPagina} />
-        )}
-      </View>
-      <View style={styles.bottomContent}>
-        <BarraInferior onMudancaPagina={handleMudancaPagina} />
-      </View>
+      {login === 0 ? (
+        <Login onLoginSuccess={handleLogin} /> // 2 para Home após login bem-sucedido
+      ) : login === 1 ? (
+        <Cadastro onCadastroSuccess={() => handleLogin(0)} /> // 0 para Login após cadastro bem-sucedido
+      ) : (
+        <View style={{ flex: 1 }}>
+          <View style={styles.topContent}>
+            <BarraSuperior onMudancaPagina={handleMudancaPagina} />
+          </View>
+          <View style={styles.mainContent}>
+            {pagina === 0 ? (
+              <Home />
+            ) : pagina === 1 ? (
+              <Buscar
+                onAddToHistory={handleAddToHistory}
+                initialKeyword={initialKeyword}
+              />
+            ) : (
+              <Historico
+                searchHistory={searchHistory}
+                onMudancaPagina={handleMudancaPagina}
+              />
+            )}
+          </View>
+          <View style={styles.bottomContent}>
+            <BarraInferior onMudancaPagina={handleMudancaPagina} />
+          </View>
+        </View>
+      )}
     </SafeAreaView>
   );
 }
@@ -60,13 +84,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   mainContent: {
-    height: "92%",
+    flex: 1,
     width: "100%",
     backgroundColor: "white",
     borderRadius: 20,
   },
   bottomContent: {
-    marginTop: -40,
     width: "100%",
     height: "11%",
     borderRadius: 50,
