@@ -13,12 +13,12 @@ import {
 import axios from "axios";
 
 const NEWS_API_KEY = "bba3df2699cf480f9e466349ed84fb8b";
-const PAGE_SIZE = 20; // Número de artigos por página
+const PAGE_SIZE = 20; 
 
 export default function Home() {
   const [artigos, setArtigos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1); // Estado para a página atual
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const fetchNews = async () => {
