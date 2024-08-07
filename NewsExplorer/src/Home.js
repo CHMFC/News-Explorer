@@ -15,7 +15,7 @@ import axios from "axios";
 const NEWS_API_KEY = "bba3df2699cf480f9e466349ed84fb8b";
 const PAGE_SIZE = 20; // Número de artigos por página
 
-export default function Home({ pagina, onMudancaPagina }) {
+export default function Home() {
   const [artigos, setArtigos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1); // Estado para a página atual
@@ -30,7 +30,7 @@ export default function Home({ pagina, onMudancaPagina }) {
         setArtigos((prevArticles) => [
           ...prevArticles,
           ...response.data.articles,
-        ]); // Append new articles
+        ]); 
       } catch (error) {
         console.error("Error fetching the news:", error);
       } finally {
@@ -39,7 +39,7 @@ export default function Home({ pagina, onMudancaPagina }) {
     };
 
     fetchNews();
-  }, [page]); // Refetch news when page changes
+  }, [page]); 
 
   const loadMoreArticles = () => {
     setPage((prevPage) => prevPage + 1);
@@ -68,14 +68,6 @@ export default function Home({ pagina, onMudancaPagina }) {
               {article.author ? article.author : "Desconhecido"}
             </Text>
           </View>
-          {article.urlToImage && (
-            <Image
-              source={{
-                uri: article.urlToImage,
-              }}
-              style={styles.image}
-            />
-          )}
           <View style={styles.articleTitleContainerStyle}>
             <Text style={styles.articleTitleTextStyle}>{article.title}</Text>
           </View>

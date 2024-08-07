@@ -2,6 +2,8 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, SafeAreaView, Platform, View } from "react-native";
 import React, { useState } from "react";
 import Home from "./src/Home";
+import BarraSuperior from "./src/BarraSuperior";
+import BarraInferior from "./src/BarraInferior";
 
 export default function App() {
   const [pagina, setPagina] = useState(0);
@@ -12,15 +14,19 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.topContent}></View>
+      <View style={styles.topContent}>
+        <BarraSuperior/>
+      </View>
       <View style={styles.mainContent}>
         {pagina == 0 ? (
-          <Home pagina={pagina} onMudancaPagina={handleMudancaPagina} />
+          <Home/>
         ) : (
           <></>
         )}
       </View>
-      <View style={styles.bottomContent}></View>
+      <View style={styles.bottomContent}>
+        <BarraInferior/>
+      </View>
     </SafeAreaView>
   );
 }
