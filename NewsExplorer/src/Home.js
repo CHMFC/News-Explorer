@@ -68,6 +68,13 @@ export default function Home() {
               {article.author ? article.author : "Desconhecido"}
             </Text>
           </View>
+          {artigos.urlToImage && (
+              <Image
+                source={{ uri: artigos.urlToImage }}
+                style={styles.image}
+                resizeMode="contain"
+              />
+            )}
           <View style={styles.articleTitleContainerStyle}>
             <Text style={styles.articleTitleTextStyle}>{article.title}</Text>
           </View>
