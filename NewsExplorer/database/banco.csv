@@ -1,2 +1,2 @@
-username,password
-admin,admin123
+username,password,name,email
+admin,admin123,Henrique Fontaine,henriquefontaine@gmail.com
