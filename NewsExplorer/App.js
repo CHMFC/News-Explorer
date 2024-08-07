@@ -40,9 +40,9 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       {login === 0 ? (
-        <Login onLoginSuccess={handleLogin} /> // 2 para Home após login bem-sucedido
+        <Login onLoginSuccess={handleLogin} /> 
       ) : login === 1 ? (
-        <Cadastro onCadastroSuccess={() => handleLogin(0)} /> // 0 para Login após cadastro bem-sucedido
+        <Cadastro onCadastroSuccess={handleLogin} /> 
       ) : (
         <View style={{ flex: 1 }}>
           <View style={styles.topContent}>
@@ -84,8 +84,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   mainContent: {
-    flex: 1,
     width: "100%",
+    height:"88%",
     backgroundColor: "white",
     borderRadius: 20,
   },
