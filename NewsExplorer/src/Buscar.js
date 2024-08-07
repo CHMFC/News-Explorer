@@ -46,7 +46,7 @@ export default function SearchNews() {
     <View style={styles.container}>
       <View style={styles.homeTitleContainerStyle}>
         <Text style={styles.homeTitleTextStyle}>
-          Principais notícias do dia
+          Buscar Notícias
         </Text>
       </View>
       <TextInput
@@ -95,11 +95,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    paddingTop: 10,
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
   homeTitleContainerStyle: {
-    marginTop: 16,
     marginBottom: 16,
     width: "90%",
     borderBottomWidth: 1,
@@ -116,9 +116,10 @@ const styles = StyleSheet.create({
     height: 40,
     width: '90%',
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "rgba(80,80,255,255)",
     borderRadius: 5,
     marginBottom: 10,
+    padding: 5,
   },
   resultsContainer: {
     alignItems: 'center',
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     padding: 15,
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: "rgba(150,150,255,255)",
     borderRadius: 10,
     backgroundColor: '#fff',
     width: '90%',
