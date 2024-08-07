@@ -2,11 +2,12 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, SafeAreaView, Platform, View } from "react-native";
 import React, { useState } from "react";
 import Home from "./src/Home";
+import Buscar from "./src/Buscar";
 import BarraSuperior from "./src/BarraSuperior";
 import BarraInferior from "./src/BarraInferior";
 
 export default function App() {
-  const [pagina, setPagina] = useState(0);
+  const [pagina, setPagina] = useState(1);
 
   const handleMudancaPagina = (codPagina) => {
     setPagina(codPagina);
@@ -21,7 +22,7 @@ export default function App() {
         {pagina == 0 ? (
           <Home/>
         ) : (
-          <></>
+          <Buscar/>
         )}
       </View>
       <View style={styles.bottomContent}>
