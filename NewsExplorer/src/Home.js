@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 10,
     alignItems: "center",
+    paddingBottom:80,
   },
   homeTitleContainerStyle: {
     marginBottom: 16,
@@ -106,7 +107,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 2,
   },
   homeTitleTextStyle: {
     fontSize: 28,
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     width: "90%",
   },
   articleOriginContainerStyle: {
-    backgroundColor: "rgba(0,100,255,100)",
+    backgroundColor: "rgba(100,100,255,100)",
     borderWidth: 1,
     borderRadius: 10,
     borderColor: "#ddd",

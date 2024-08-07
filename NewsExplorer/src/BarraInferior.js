@@ -15,7 +15,7 @@ export default function BarraInferior({ onMudancaPagina }) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={irParaBuscar} style={styles.leftContainer}>
+      <TouchableOpacity onPress={irParaHistorico} style={styles.leftContainer}>
         <Image
           resizeMode="contain"
           style={styles.logoImage}
