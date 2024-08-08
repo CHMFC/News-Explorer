@@ -20,6 +20,8 @@ Features:
 
 
 link do github do projeto: https://github.com/CHMFC/News-Explorer
+link do Drive com material: https://drive.google.com/drive/folders/10gE1tS-ysw4BzlsebFCUe9THDjFmKHdd?usp=share_link
+
 
 Utilização do Expo para maior facilidade em testar as configurações tanto na máquina quanto no celular.
 
